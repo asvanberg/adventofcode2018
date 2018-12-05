@@ -3,9 +3,9 @@ module Day1.Problem1 where
 import Control.Monad.IO.Class
 import Data.List (isPrefixOf)
 
-problem1 :: IO ()
-problem1 = do
-  print =<< foldr (+) 0 <$> frequencyChanges "src/Day1/input"
+solution :: (MonadIO m) => m Int
+solution = do
+  foldr (+) 0 <$> frequencyChanges "src/Day1/input"
 
 frequencyChanges :: (MonadIO m) => FilePath -> m [Int]
 frequencyChanges file = liftIO $ (fmap readNumber) <$> lines <$> readFile file

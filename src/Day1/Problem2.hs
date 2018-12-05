@@ -1,17 +1,17 @@
 {-# LANGUAGE FlexibleContexts #-}
 module Day1.Problem2 where
 
+import Control.Monad.IO.Class
 import Control.Monad.State
 import Data.Set (Set)
 import qualified Data.Set as Set
 
 import Day1.Problem1 (frequencyChanges)
 
-problem2 :: IO ()
-problem2 = do
+solution :: (MonadIO m) => m Int
+solution = do
   deltas <- frequencyChanges "src/Day1/input"
-  f <- evalStateT (duplicateFrequency (cycle deltas)) (Set.empty, 0)
-  print f
+  evalStateT (duplicateFrequency (cycle deltas)) (Set.empty, 0)
 
 duplicateFrequency :: (MonadState (Set Int, Int) m) => [Int] -> m Int
 duplicateFrequency (delta:deltas) = do
