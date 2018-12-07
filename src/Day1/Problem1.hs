@@ -4,11 +4,10 @@ import Control.Monad.IO.Class
 import Data.List (isPrefixOf)
 
 solution :: (MonadIO m) => m Int
-solution = do
-  foldr (+) 0 <$> frequencyChanges "src/Day1/input"
+solution = sum <$> frequencyChanges "src/Day1/input"
 
 frequencyChanges :: (MonadIO m) => FilePath -> m [Int]
-frequencyChanges file = liftIO $ (fmap readNumber) <$> lines <$> readFile file
+frequencyChanges = liftIO . fmap (fmap readNumber . lines) . readFile
   where
     readNumber = read . clean
     clean = iif tail id =<< isPrefixOf "+"
