@@ -25,6 +25,7 @@ dependencies:
 
 library:
   source-dirs: src
+  exposed: true
 
 executables:
   adventofcode2018-exe:
